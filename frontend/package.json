@@ -16,10 +16,12 @@
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
     "lucide-react": "^0.441.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
+    "recharts": "^2.12.7",
     "recoil": "^0.7.7",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"
@@ -31,6 +33,7 @@
     "autoprefixer": "^10.4.20",
     "globals": "^15.9.0",
     "postcss": "^8.4.47",
+    "react-error-overlay": "^6.0.9",
     "tailwindcss": "^3.4.12",
     "vite": "^5.4.1"
   }
