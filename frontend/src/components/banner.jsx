@@ -2,9 +2,18 @@ import { useRecoilState } from "recoil";
 import { userAtom } from "../recoil/userAtoms";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useUser } from "@clerk/clerk-react";
 
 function Banner() {
-  const [banner, setBanner] = useRecoilState(userAtom);
+  // const [banner, setBanner] = useRecoilState(userAtom);
+
+  const { isSignedIn, user, isLoaded } = useUser();
+
+  if (!isSignedIn || !isLoaded) {
+    return null;
+  }
+  
+  const [banner, setBanner] = useState({ emailId: null });
   const [isBreached, setIsBreached] = useState(false);
 
   const url = "http://localhost:3000";

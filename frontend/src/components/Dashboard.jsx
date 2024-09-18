@@ -32,7 +32,8 @@ const BreachMetricsDashboard = ({ data }) => {
     <div className="p-4 space-y-4">
       <h1 className="text-2xl font-bold mb-4">Breach Metrics Dashboard</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {/* Breach Summary Card */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
@@ -59,6 +60,7 @@ const BreachMetricsDashboard = ({ data }) => {
           </CardContent>
         </Card>
 
+        {/* Risk Assessment Card */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
@@ -93,42 +95,44 @@ const BreachMetricsDashboard = ({ data }) => {
             </Alert>
           </CardContent>
         </Card>
+
+        {/* Exposed Data Card */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <FileText className="mr-2" /> Exposed Data
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="list-disc pl-5">
+              {breach.xposed_data.split(";").map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+
+        {/* Yearly Breach Distribution Card */}
+        <Card className="col-span-full md:col-span-2 h-64">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Calendar className="mr-2" /> Yearly Breach Distribution
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="h-full">
+            <div className="h-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={yearwiseData}>
+                  <XAxis dataKey="year" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="count" fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <FileText className="mr-2" /> Exposed Data
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ul className="list-disc pl-5">
-            {breach.xposed_data.split(";").map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <Calendar className="mr-2" /> Yearly Breach Distribution
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={yearwiseData}>
-                <XAxis dataKey="year" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="count" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };
