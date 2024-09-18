@@ -34,4 +34,15 @@ async function checkBreach(req, res) {
   }
 }
 
-export { checkBreach, pushUser };
+async function getBreachAnalysis(req, res) {
+  const mail = req.param.email;
+  const response = await axios.get(
+    `https://api.xposedornot.com/v1/breach-analytics?email=${mail}`
+  );
+  if (response) {
+    res.json(response);
+  } else {
+    res.json({ msg: "didnt get data" });
+  }
+}
+export { checkBreach, pushUser, getBreachAnalysis };

@@ -8,7 +8,7 @@ const UsersSchema = new schema({
   },
   email: {
     type: String,
-    required : true,
+    required: true,
   },
 });
 const Users = mongoose.model("Users", UsersSchema);
