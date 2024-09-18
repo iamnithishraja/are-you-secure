@@ -1,7 +1,5 @@
 import Users from '../models/userSchema.js'
-
-
-
+import axios from 'axios'
 async function pushUser(req,res){
     try{
         const userid = req.body.userId;
@@ -23,4 +21,21 @@ async function pushUser(req,res){
     }
 }
 
-export default pushUser;
+
+async function checkBreach(req,res){
+  const mail=req.param.email; 
+  const response=axios.get(`https://api.xposedornot.com/v1/check-email/${mail}`);
+  if(response){
+      if(response.error){
+          res.json({"isBreached":false});
+      }
+      else{
+          res.json({"isbreached":true});
+      }
+  }
+  else{
+      res.json({"msg":'invalid email'});
+  }
+}
+
+export  {checkBreach,pushUser};
