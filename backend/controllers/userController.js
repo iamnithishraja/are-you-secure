@@ -1,5 +1,6 @@
 import Users from "../models/userSchema.js";
 import axios from "axios";
+import sendEmail from "../utils/sendEmail.js";
 async function pushUser(req, res) {
   try {
     const userid = req.body.userId;
@@ -28,6 +29,11 @@ async function checkBreach(req, res) {
       res.json({ isBreached: false });
     } else {
       res.json({ isbreached: true });
+      sendEmail({
+        email: mail,
+        subject: "Alert your password is leacked",
+        message: "your e mail has been breatched put analysis view detailed analysis in our platform",
+      });
     }
   } else {
     res.json({ msg: "invalid email" });
