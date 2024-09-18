@@ -21,7 +21,7 @@ function PasswordForm({ showPassword, togglePasswordVisibility }) {
         setMessage(response.data.message || "Password is breached.");
       }
     } catch (error) {
-      setMessage("Request failed");
+      setMessage("Password not in database.");
     }
   };
 
