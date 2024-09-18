@@ -1,41 +1,52 @@
 import Users from '../models/userSchema.js'
 import axios from 'axios'
-async function pushUser(req,res){
-    try{
+async function pushUser(req, res) {
+    try {
         const userid = req.body.userId;
-        const mail=req.body.email;
+        const mail = req.body.email;
         console.log(userId);
-        const dbUser = await Users.findOne({id:userid});
-        if(!dbUser){
-            const user = await Users.create({id : userid,email:mail});
+        const dbUser = await Users.findOne({ id: userid });
+        if (!dbUser) {
+            const user = await Users.create({ id: userid, email: mail });
             await user.save();
-            return res.json({success : true, msg : "New User registered"});
+            return res.json({ success: true, msg: "New User registered" });
         }
-        else{
-           return res.json({msg : "already registerd"})
+        else {
+            return res.json({ msg: "already registerd" })
         }
-        
-    }catch(e){
+
+    } catch (e) {
         console.log(e);
-        res.json({success : false , msg : "Unable to parse the body parameters."});
+        res.json({ success: false, msg: "Unable to parse the body parameters." });
     }
 }
 
 
-async function checkBreach(req,res){
-  const mail=req.param.email; 
-  const response=axios.get(`https://api.xposedornot.com/v1/check-email/${mail}`);
-  if(response){
-      if(response.error){
-          res.json({"isBreached":false});
-      }
-      else{
-          res.json({"isbreached":true});
-      }
-  }
-  else{
-      res.json({"msg":'invalid email'});
-  }
+async function checkBreach(req, res) {
+    const mail = req.param.email;
+    const response = axios.get(
+        `https://api.xposedornot.com/v1/check-email/${mail}`
+    );
+    if (response) {
+        if (response.error) {
+            res.json({ isBreached: false });
+        } else {
+            res.json({ isbreached: true });
+        }
+    } else {
+        res.json({ msg: "invalid email" });
+    }
 }
 
-export  {checkBreach,pushUser};
+async function getBreachAnalysis(req, res) {
+    const mail = req.param.email;
+    const response = await axios.get(`https://api.xposedornot.com/v1/breach-analytics?email=${mail}`);
+    if (response) {
+        res.json(response);
+    }
+    else {
+        res.json({ "msg": "didnt get data" });
+    }
+}
+
+export { checkBreach, pushUser , getBreachAnalysis};
