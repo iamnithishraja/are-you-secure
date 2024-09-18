@@ -42,9 +42,18 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">
-              Logo
-            </span>
+            <div className="relative group">
+              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 tracking-tighter uppercase transform skew-x-6 hover:skew-x-0 transition-all duration-300 ease-in-out">
+                Are you secured
+              </h1>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+              <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-teal-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-in-out"></div>
+              <div className="absolute -top-1 left-0 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></div>
+              <div
+                className="absolute -top-1 right-0 w-2 h-2 bg-green-400 rounded-full animate-ping"
+                style={{ animationDelay: "0.5s" }}
+              ></div>
+            </div>
           </div>
           <div className="flex items-center gap-x-8">
             <div>
