@@ -33,7 +33,8 @@ async function checkBreach(req, res) {
       sendEmail({
         email: mail,
         subject: "Alert your password is leacked",
-        message: "your e mail has been breatched put analysis view detailed analysis in our platform",
+        message:
+          "your e mail has been breatched put analysis view detailed analysis in our platform",
       });
     }
   } else {
@@ -42,15 +43,12 @@ async function checkBreach(req, res) {
 }
 
 async function getBreachAnalysis(req, res) {
-  const mail = req.param.email;
+  const mail = req.params.email;
+
   const response = await axios.get(
     `https://api.xposedornot.com/v1/breach-analytics?email=${mail}`
   );
-  if (response) {
-    res.json(response);
-  } else {
-    res.json({ msg: "didnt get data" });
-  }
+  res.json(response.data);
 }
 
 function keccakHash(password) {
