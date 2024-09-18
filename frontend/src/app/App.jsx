@@ -48,10 +48,7 @@ function App() {
       if (user) {
         try {
           const response = await axios.get(
-            `http://localhost:3000/users/getBreachAnalysis`,
-            {
-              params: { email: user.primaryEmailAddress.emailAddress },
-            }
+            `http://localhost:3000/users/getBreachAnalysis/${user.primaryEmailAddress.emailAddress}`,
           );
           setData(response.data);
         } catch (error) {
