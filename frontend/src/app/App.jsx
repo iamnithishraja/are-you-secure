@@ -37,7 +37,9 @@ function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { user } = useUser(); 
+  const { user } = useUser();
+
+  const url = "http://localhost:3000";
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -48,7 +50,7 @@ function App() {
       if (user) {
         try {
           const response = await axios.get(
-            `http://localhost:3000/users/getBreachAnalysis/${user.primaryEmailAddress.emailAddress}`,
+            `${url}/users/getBreachAnalysis/${user.primaryEmailAddress.emailAddress}`
           );
           setData(response.data);
         } catch (error) {

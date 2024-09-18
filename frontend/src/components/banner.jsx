@@ -23,7 +23,7 @@ function Banner() {
       if (banner?.email) {
         try {
           const res = await axios.get(
-            `http://${url}/users/checkBreach/${banner.email}`
+            `${url}/users/checkBreach/${banner.email}`
           );
           setIsBreached(res.data.isBreached);
         } catch (error) {
